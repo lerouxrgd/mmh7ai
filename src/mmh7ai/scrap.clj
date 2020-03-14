@@ -56,8 +56,8 @@
        (-> tr :content (nth 2) :content
            (->> (filter #(not= :br (:tag %)))
                 (partition 2)
-                (map (fn [[amount resource]] 
-                       {(-> resource :attrs :href (str/split #"/") last ->kw) 
+                (map (fn [[amount resource]]
+                       {(-> resource :attrs :href (str/split #"/") last ->kw)
                         (-> amount html/text str/trim Integer/parseInt)}))
                 (apply merge)))
        #{:damage}
@@ -102,7 +102,7 @@
                    (partition 2)
                    (map
                     (fn [[level skills]]
-                      {(-> (html/select level [:th]) 
+                      {(-> (html/select level [:th])
                            first
                            html/text
                            (-> (str/split #" ") first ->kw))
@@ -121,7 +121,7 @@
 (defn ul-data [html-coll]
   (->> html-coll
        (filter #(= :ul (:tag %)))
-       (mapcat 
+       (mapcat
         (fn [li]
           (map (fn [elem]
                  {:name (html/text elem)
