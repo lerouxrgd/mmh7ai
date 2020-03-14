@@ -1,6 +1,7 @@
 (ns mmh7ai.db
   (:require
    [clojure.java.io :as io]
+   [clojure.pprint :as pprint]
    [datascript.core :as d]
    [mmh7ai.scrap :refer [scrap-db]]))
 
@@ -16,7 +17,7 @@
     (with-open [w (io/writer db-file)]
       (binding [*print-length* false
                 *out* w]
-        (clojure.pprint/write db))
+        (pprint/write db))
       (println "Wrote data to:" db-file))))
 
 (defn- read-db-file []
@@ -37,7 +38,7 @@
     (let [schema {}
           conn (d/create-conn schema)]
       (d/transact!
-       conn (mapcat (fn [[faction data]] (:units data)) (read-db-file)))
+       conn (mapcat (fn [[_faction data]] (:units data)) (read-db-file)))
       (alter-var-root #'*conn* (constantly conn))))
   :done)
 

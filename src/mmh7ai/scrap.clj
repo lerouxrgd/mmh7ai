@@ -1,10 +1,8 @@
 (ns mmh7ai.scrap
   (:require
-   [clojure.java.io :as io]
    [clojure.string :as str]
    [net.cgrand.enlive-html :as html]
-   [clj-http.client :as client]
-   [cheshire.core :as json]))
+   [clj-http.client :as client]))
 
 (def wikia "http://mightandmagic.wikia.com")
 
@@ -19,7 +17,7 @@
     :sylvan     (str wikia "/wiki/Sylvan_(H7)")}})
 
 (defmulti scrap
-  (fn [type url] type))
+  (fn [type _url] type))
 
 (defn resp->html [resp]
   (-> (:body resp)

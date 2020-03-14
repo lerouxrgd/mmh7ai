@@ -5,5 +5,4 @@
   [[org.clojure/clojure "1.10.1"]
    [enlive "1.1.6"]
    [clj-http "3.10.0"]
-   [cheshire "5.10.0"]
    [datascript "0.18.10"]])
